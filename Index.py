@@ -11,6 +11,7 @@ from tqdm import tqdm
 
 class Index():
     def __init__(self, docs, preprocessed=False):
+        nltk.download('wordnet')
         if preprocessed:
             index, inverted, queries, ground_truth, raw_queries, raw_docs = docs
             with open(queries) as f:
