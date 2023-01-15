@@ -108,8 +108,11 @@ else:
         cbar = plt.colorbar()
         cbar.set_ticks(np.unique(clusters))
         
-        col2.header('Silhouette score')
-        col2.write(round(silhouette_score(X, clusters), 4))
+        try:
+            col2.header('Silhouette score')
+            col2.write(round(silhouette_score(X, clusters), 4))
+        except:
+            pass
         col2.header('2D distribution')
         col2.pyplot(fig)
     try:
