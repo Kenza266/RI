@@ -112,26 +112,29 @@ else:
         col2.write(round(silhouette_score(X, clusters), 4))
         col2.header('2D distribution')
         col2.pyplot(fig)
+    try:
 
-    index = index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
-    
-    y = index.ground_truth 
-    y['Relevent document'] = [clusters[doc-1] for doc in y['Relevent document']]
-    y.drop(y[y['Relevent document'] == -2].index, inplace=True)
-    grouped = y.groupby('Query')
-    def group_to_list(group):
-        return np.array(group['Relevent document'])
-    ground_truth = np.array(grouped.apply(group_to_list))
-    ground_truth = [np.unique(row)[np.argmax(np.unique(row, return_counts=True)[1])] for row in ground_truth]
-    
-    nb = NaiveBayes()
-    data = [index.queries[str(i)] for i in np.unique(y['Query'])]
-    labels = ground_truth
-    X_train, X_test, y_train, y_test = train_test_split(data, ground_truth, test_size=0.2, random_state=15, stratify=ground_truth)
-    nb.train(X_train, y_train) 
-    pred = []
-    for query, gt in zip(X_test, y_test):
-        prediction = nb.predict(query)
-        pred.append(prediction)
-    report = classification_report(y_test, pred)
-    col1.text("Report\n"+report)
+        index = index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
+        
+        y = index.ground_truth 
+        y['Relevent document'] = [clusters[doc-1] for doc in y['Relevent document']]
+        y.drop(y[y['Relevent document'] == -2].index, inplace=True)
+        grouped = y.groupby('Query')
+        def group_to_list(group):
+            return np.array(group['Relevent document'])
+        ground_truth = np.array(grouped.apply(group_to_list))
+        ground_truth = [np.unique(row)[np.argmax(np.unique(row, return_counts=True)[1])] for row in ground_truth]
+        
+        nb = NaiveBayes()
+        data = [index.queries[str(i)] for i in np.unique(y['Query'])]
+        labels = ground_truth
+        X_train, X_test, y_train, y_test = train_test_split(data, ground_truth, test_size=0.2, random_state=15, stratify=ground_truth)
+        nb.train(X_train, y_train) 
+        pred = []
+        for query, gt in zip(X_test, y_test):
+            prediction = nb.predict(query)
+            pred.append(prediction)
+        report = classification_report(y_test, pred)
+        col1.text("Report\n"+report)
+    except:
+        pass
