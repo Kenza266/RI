@@ -4,7 +4,7 @@ from Index import Index
 
 st.set_page_config(layout='wide')
 
-index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
+index = Index(('..\\DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
 
 col1, col2 = st.columns(2)
 
