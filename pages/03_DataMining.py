@@ -18,7 +18,7 @@ warnings.filterwarnings("ignore")
 st.set_page_config(layout='wide')
 
 if 'index' not in st.session_state:
-    st.session_state.index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
+    st.session_state.index = Index(('DS/index.json', 'DS/inverted.json', 'DS/queries.json', 'DS/ground_truth.csv', 'DS/raw_queries.json', 'DS/raw_docs.json'), preprocessed=True)
     st.session_state.data = np.array(list([list(i.keys()) for i in st.session_state.index.index.values()]), dtype=object) 
 
     X = list([list(i.keys()) for i in st.session_state.index.index.values()])
@@ -63,7 +63,7 @@ if model == 'GloVe with cosine':
     col2.header('2D distribution')
     col2.image('tsne_GloVe.png')
 
-    index = index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
+    index = index = Index(('DS/index.json', 'DS/inverted.json', 'DS/queries.json', 'DS/ground_truth.csv', 'DS/raw_queries.json', 'DS/raw_docs.json'), preprocessed=True)
     
     y = index.ground_truth 
     y['Relevent document'] = [clusters[doc-1] for doc in y['Relevent document']]
@@ -117,7 +117,7 @@ else:
         col2.pyplot(fig)
     try:
 
-        index = index = Index(('DS\\index.json', 'DS\\inverted.json', 'DS\\queries.json', 'DS\\ground_truth.csv', 'DS\\raw_queries.json', 'DS\\raw_docs.json'), preprocessed=True)
+        index = index = Index(('DS/index.json', 'DS/inverted.json', 'DS/queries.json', 'DS/ground_truth.csv', 'DS/raw_queries.json', 'DS/raw_docs.json'), preprocessed=True)
         
         y = index.ground_truth 
         y['Relevent document'] = [clusters[doc-1] for doc in y['Relevent document']]

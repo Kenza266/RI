@@ -11,7 +11,7 @@ rocs = {}
 col1, col2 = st.columns(2)
 
 for model in models:
-    rocs[model] = np.load('Eval//'+model+'.npy')
+    rocs[model] = np.load('Eval/'+model+'.npy')
 
 eval = pd.read_csv('Eval//Eval.csv')
 eval = eval.drop([eval.columns[0]], axis=1)
