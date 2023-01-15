@@ -6,7 +6,6 @@ import nltk
 import numpy as np
 import pandas as pd
 from nltk.stem import PorterStemmer, WordNetLemmatizer
-from rank_bm25 import BM25Okapi
 from tqdm import tqdm
 
 
