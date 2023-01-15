@@ -137,6 +137,7 @@ else:
         for query, gt in zip(X_test, y_test):
             prediction = nb.predict(query)
             pred.append(prediction)
+        col1.header('Classification')
         report = classification_report(y_test, pred)
         col1.text("Report\n"+report)
     except:
