@@ -1,17 +1,14 @@
 import streamlit as st
-import json
 import numpy as np
-import pandas as pd
 from Index import Index 
 from collections import Counter
 from sklearn.manifold import TSNE 
 from matplotlib import pyplot as plt 
 from sklearn.decomposition import PCA
-from sklearn.cluster import DBSCAN as skDB
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import silhouette_score
-from utils import DBscan, NaiveBayes, grid_search, plot_graphs
+from utils import DBscan, NaiveBayes
 import warnings
 warnings.filterwarnings("ignore") 
 

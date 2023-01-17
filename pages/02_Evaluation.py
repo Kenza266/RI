@@ -5,29 +5,49 @@ from matplotlib import pyplot as plt
 
 
 st.set_page_config(layout='wide')
-models = ['Scalar', 'Cosine', 'Jaccard', 'BM25'] # 'Bool', 'DataMining'
+models = ['Scalar', 'Cosine', 'Jaccard', 'BM25']
 rocs = {}
+PRs = {}
 
 col1, col2 = st.columns(2)
 
 for model in models:
-    rocs[model] = np.load('Eval/'+model+'.npy')
+    rocs[model] = np.load('Eval/ROC_'+model+'.npy')
+    PRs[model] = np.load('Eval/PR_'+model+'.npy')
 
-eval = pd.read_csv('Eval//Eval.csv')
+eval = pd.read_csv('Eval//Eval_Vector.csv')
 eval = eval.drop([eval.columns[0]], axis=1)
 col1.title('Precisions, Recalls and F-scores')
+col1.markdown('Vector')
 col1.dataframe(eval)
 
-col2.title('ROC curves')
+eval = pd.read_csv('Eval//Eval_Prob.csv')
+eval = eval.drop([eval.columns[0]], axis=1)
+col1.markdown('Probability')
+col1.dataframe(eval)
+
+col2.title('Curves')
 
 to_display = col2.multiselect(
     'Choose the models to display',
     models, models)
 
-fig, ax = plt.subplots()
+tabs = col2.tabs(['Precision Recall', 'ROC'])
 
-for roc in to_display:
-    plt.plot(rocs[roc][:, 1], rocs[roc][:, 0], label=roc)
-plt.legend()
+with tabs[0]:
+    fig, ax = plt.subplots()
 
-col2.pyplot(fig)
+    for roc in to_display:
+        plt.plot(PRs[roc][:, 1], PRs[roc][:, 0], label=roc)
+    plt.legend()
+
+    st.pyplot(fig)
+
+with tabs[1]:
+    fig, ax = plt.subplots()
+
+    for roc in to_display:
+        plt.plot(rocs[roc][0], rocs[roc][1], label=roc)
+    plt.legend()
+
+    st.pyplot(fig)
