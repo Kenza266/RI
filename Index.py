@@ -5,6 +5,8 @@ import re
 import nltk
 import numpy as np
 import pandas as pd
+import nltk
+nltk.download('stopwords')
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from tqdm import tqdm
 
