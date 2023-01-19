@@ -18,12 +18,12 @@ for model in models:
 eval = pd.read_csv('Eval//Eval_Vector.csv')
 eval = eval.drop([eval.columns[0]], axis=1)
 col1.title('Precisions, Recalls and F-scores')
-col1.markdown('Vector')
+col1.markdown('Vector basec')
 col1.dataframe(eval)
 
 eval = pd.read_csv('Eval//Eval_Prob.csv')
 eval = eval.drop([eval.columns[0]], axis=1)
-col1.markdown('Probability')
+col1.markdown('Probability based')
 col1.dataframe(eval)
 
 col2.title('Curves')
@@ -38,16 +38,21 @@ with tabs[0]:
     fig, ax = plt.subplots()
 
     for roc in to_display:
-        plt.plot(PRs[roc][:, 1], PRs[roc][:, 0], label=roc)
-    plt.legend()
+        ax.plot(PRs[roc][:, 1], PRs[roc][:, 0], label=roc)
 
+    ax.set_xlabel('Recall')
+    ax.set_ylabel('Precision')
+    plt.legend()
     st.pyplot(fig)
 
 with tabs[1]:
     fig, ax = plt.subplots()
 
     for roc in to_display:
-        plt.plot(rocs[roc][0], rocs[roc][1], label=roc)
+        ax.plot(rocs[roc][0], rocs[roc][1], label=roc)
+
+    ax.set_xlabel('False Positive Rate')
+    ax.set_ylabel('True Positive Rate')
     plt.legend()
 
     st.pyplot(fig)
