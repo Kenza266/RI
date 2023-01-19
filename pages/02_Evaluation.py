@@ -18,7 +18,7 @@ for model in models:
 eval = pd.read_csv('Eval//Eval_Vector.csv')
 eval = eval.drop([eval.columns[0]], axis=1)
 col1.title('Precisions, Recalls and F-scores')
-col1.markdown('Vector basec')
+col1.markdown('Vector based')
 col1.dataframe(eval)
 
 eval = pd.read_csv('Eval//Eval_Prob.csv')
