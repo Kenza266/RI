@@ -211,7 +211,7 @@ class Index():
         tokens_list = [token.lower() for token in tokens_list if token not in empty_words]
         return tokens_list
 
-    def vector_search_per_q(self, query, max_docs=10, metric='scalar'):
+    def vector_search_per_q(self, query, max_docs=50, metric='scalar'):
         query = self.tokenize_q(query)
         if metric == 'scalar':
             metric = self.scalar_prod
