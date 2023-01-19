@@ -14,7 +14,8 @@ warnings.filterwarnings("ignore")
 
 st.set_page_config(layout='wide')
 
-if 'index' not in st.session_state:
+
+if not any(var in st.session_state for var in ['index', 'data', 'data_new', 'reduced', 'tsne']):  
     st.session_state.index = Index(('DS/index.json', 'DS/inverted.json', 'DS/queries.json', 'DS/ground_truth.csv', 'DS/raw_queries.json', 'DS/raw_docs.json'), preprocessed=True)
     st.session_state.data = np.array(list([list(i.keys()) for i in st.session_state.index.index.values()]), dtype=object) 
 
