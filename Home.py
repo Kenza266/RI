@@ -45,13 +45,13 @@ except:
 st.markdown("""---""")
 
 st.title('Dataset\'s queries')
-q = st.number_input('Choose a query', min_value=0, max_value=len(list(index.queries.values()))-1)
-query = index.queries[str(q)] 
+q = st.number_input('Choose a query', min_value=1, max_value=len(list(index.queries.values())))
+query = index.queries[str(q-1)] 
 
 col1, col2 = st.columns(2)
 with col1:
     st.markdown('Query')
-    st.markdown(index.raw_queries[str(q)])
+    st.markdown(index.raw_queries[str(q-1)])
     st.markdown('Tokens')
     st.write(query)
 with col2:
